@@ -1,0 +1,75 @@
+{
+  "name": "SoundCloud Button",
+  "version": "{VERSION}",
+  "manifest_version": 2,
+  "description": "Extension allows you to play/pause your SoundCloud stream using button or on site player. Do it even faster by using context menu",
+  "homepage_url": "http://quick-hint.com",
+  "icons": {
+    "16": "icons/soundcloud_btn_ext_icon_48x48.png",
+    "48": "icons/soundcloud_btn_ext_icon_48x48.png",
+    "128": "icons/soundcloud_btn_ext_icon_64x64.png"
+  },
+  "background": {
+    "scripts": [{RELOAD}
+      "libs/promise-0.1.1.min.js",
+      "libs/analiticsTracking.js",
+      "src/bg/background.js"
+    ]
+  },
+  "permissions": [
+    "tabs",
+    "contextMenus",
+    "*://*.soundcloud.com/*",
+    "*://soundcloud.com/*",
+    "https://ssl.google-analytics.com/ga.js"
+  ],
+  "browser_action": {
+    "default_icon": "icons/play19.png",
+    "default_title": "Play SoundCloud"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.soundcloud.com/*",
+        "*://soundcloud.com/*"
+      ],
+      "js": [
+        "libs/analiticsTracking.js",
+        "src/inject/inject.js"
+      ],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "exclude_matches":[
+        "*://*.soundcloud.com/*",
+        "*://soundcloud.com/*"
+      ],
+      "js": [
+        "src/player/player.js"
+      ],
+      "css": [
+        "src/player/player.css"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "web_accessible_resources":[
+    "src/player/*",
+    "icons/*",
+    "libs/*"
+  ],
+  "options_page":"src/options/options.html",
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'",
+  "commands": {
+    "play-pause": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+{HOT_KEY}",
+        "mac": "Command+Shift+{HOT_KEY}"
+      },
+      "description":"Play/Pause"
+    }
+  }
+}

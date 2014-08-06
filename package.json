@@ -1,0 +1,16 @@
+{
+  "name": "soundcloud-btn",
+  "version": "2.0.2",
+  "private": true,
+  "scripts": {
+  },
+  "dependencies": {
+    "grunt": "latest",
+    "grunt-contrib-copy":"latest",
+    "grunt-contrib-clean":"latest",
+    "grunt-contrib-watch":"latest",
+    "grunt-text-replace":"latest",
+    "grunt-crx":"latest",
+    "grunt-contrib-compress":"~0.8.0"
+  }
+}
